@@ -54,7 +54,7 @@
          </div>
          <div class="mb-3">
             <label class="form-label">Profile Picture</label>
-            <input type="file" class="form-control" name="p_p">
+            <input type="file" class="form-control" name="pp">
          </div>
          <button type="submit" class="btn btn-primary">Sign Up</button>
          <a href="index.php">Login</a>

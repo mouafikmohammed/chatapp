@@ -38,7 +38,68 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['name'
       */
       header("Location: ../../signup.php?error=$em&$data");
    }else {
-      echo "good!";
+      $sql = "SELECT username FROM users WHERE username=?";
+      $stmt = $conn -> prepare($sql);
+      $stmt->execute([$username]);
+      
+      if($stmt->rowCount() > 0){
+         $em "The username ($username) is taken";
+         header("Location: ../../signup.php?error=$em&$data");
+         exit;
+      }else {
+         # Profile picture Uploading
+         if(isset($_FILES['pp'])){
+            # get data and strote them in var
+            $img_name = $_FILES['pp']['name'];
+            $tmp_name = $_FILES['pp']['ntmp'];
+            $error = $_FILES['pp']['error'];
+
+            # if there is not error occurred while uploading
+            if($error === 0){
+               # get iamge extension store it in var
+               $img_ex = pathinfo($image_name, PATHINFO_EXTENSION);
+
+               /*
+                  convert the image extension into lower case and store it in var
+               */
+               $img_ex_lc = strtolower($img_ex);
+
+               /*
+                  crating array that stores allowed to upload image extension.
+               */
+               $allowed_exs = array("jpg","jpeg","png");
+               /*
+                  check if the image extension is present in $allowed_exs array
+               */
+               if(in_array($img_ex_lc,$allowed_exs)){
+                  /* renaming the image with user's username like: username.$img_ex_lc
+                  */
+                  $new_img_name = $username.'.'.$imh_ex_lc;
+
+                  # crating upload path on root directly
+                  $img_upload_path = '../../uploads'.$new_img_name;
+
+                  # move uploaded image to ./upload folder
+                  move_uploaded_file($tmp_name,$img_upload_path);
+
+               }else {
+                  $em "You can't upload files of this type";
+                  header("Location: ../../signup.php?error=$em&$data");
+                  exit;
+               }
+
+            }else {
+               $em "Unknown error occurred";
+               header("Location: ../../signup.php?error=$em&$data");
+               exit;
+            }
+         }
+         // password hashing 
+         $password = password_hash($password,PASSWORD_DEFAULT);
+
+         # if the user upload Profile Picture
+         
+      }
    }
 
 }else {
