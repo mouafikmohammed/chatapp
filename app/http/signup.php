@@ -98,7 +98,7 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['name'
          $password = password_hash($password,PASSWORD_DEFAULT);
 
          # if the user upload Profile Picture
-         
+         #-------------------------------------------------------------------------------
       }
    }
 
