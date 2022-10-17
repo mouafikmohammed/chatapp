@@ -27,17 +27,26 @@
          <div class="alert alert-warning" role="alert">
             <?php echo htmlspecialchars($_GET['error']);?>
          </div>
-         <?php } ?>
+         <?php } 
+
+            if(isset($_GET['name'])){
+               $name = $_GET['name'];
+            }else $name = '';
+            
+            if(isset($_GET['username'])){
+               $username = $_GET['username'];
+            }else $username = '';
+         ?>
 
 
 
          <div class="mb-3">
             <label class="form-label">Name</label>
-            <input type="text" class="form-control" name="name">
+            <input type="text" class="form-control" name="name" value="<?=$name?>">
          </div>
          <div class="mb-3">
             <label class="form-label">User name</label>
-            <input type="text" class="form-control" name="username" >
+            <input type="text" class="form-control" name="username" value="<?=$username?>">
          </div>
          <div class="mb-3">
             <label class="form-label">Password</label>

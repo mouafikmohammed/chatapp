@@ -4,6 +4,9 @@
 
 if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['name'])){
 
+   # database connection file
+   include '../db.conn.php';
+   
    # get data from POST request and store them in var
    $name = $_POST['name'];
    $password = $_POST['password'];
@@ -24,14 +27,16 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['name'
       # error message
       $em = "Username is required";
 
-      # redirect to 'signup.php' and passing error message
-      header("Location: ../../signup.php?error=$em");
+      /* redirect to 'signup.php' and passing error message and data
+      */
+      header("Location: ../../signup.php?error=$em&$data");
    }else if(empty($password)){
       # error message
       $em = "Password is required";
 
-      # redirect to 'signup.php' and passing error message
-      header("Location: ../../signup.php?error=$em");
+      /* redirect to 'signup.php' and passing error message and data
+      */
+      header("Location: ../../signup.php?error=$em&$data");
    }else {
       echo "good!";
    }
