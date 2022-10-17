@@ -25,19 +25,19 @@
 
          <div class="mb-3">
             <label class="form-label">Name</label>
-            <input type="text" name="username" class="form-control">
+            <input type="text" class="form-control" name="name">
          </div>
          <div class="mb-3">
             <label class="form-label">User name</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" name="username" >
          </div>
          <div class="mb-3">
             <label class="form-label">Password</label>
-            <input type="password" class="form-control">
+            <input type="password" class="form-control" name="password">
          </div>
          <div class="mb-3">
             <label class="form-label">Profile Picture</label>
-            <input type="file" class="form-control">
+            <input type="file" class="form-control" name="p_p">
          </div>
          <button type="submit" class="btn btn-primary">Sign Up</button>
          <a href="index.php">Login</a>
