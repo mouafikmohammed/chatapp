@@ -23,6 +23,14 @@
                        Sign Up</h3>
          </div>
 
+         <?php if(isset($_GET['error'])) { ?>
+         <div class="alert alert-warning" role="alert">
+            <?php echo htmlspecialchars($_GET['error']);?>
+         </div>
+         <?php } ?>
+
+
+
          <div class="mb-3">
             <label class="form-label">Name</label>
             <input type="text" class="form-control" name="name">
