@@ -23,6 +23,12 @@
                        Login</h3>
          </div>
 
+         <?php if(isset($_GET['success'])) { ?>
+         <div class="alert alert-success" role="alert">
+            <?php echo htmlspecialchars($_GET['success']);?>
+         </div>
+         <?php } ?>
+
          <div class="mb-3">
             <label class="form-label">User name</label>
             <input type="text" class="form-control">
