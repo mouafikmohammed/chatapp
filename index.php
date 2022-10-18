@@ -22,6 +22,11 @@
                        text-center">
                        Login</h3>
          </div>
+         <?php if(isset($_GET['error'])) { ?>
+         <div class="alert alert-warning" role="alert">
+            <?php echo htmlspecialchars($_GET['error']);?>
+         </div>
+         <?php } ?>
 
          <?php if(isset($_GET['success'])) { ?>
          <div class="alert alert-success" role="alert">
@@ -31,11 +36,11 @@
 
          <div class="mb-3">
             <label class="form-label">User name</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" name="username">
          </div>
          <div class="mb-3">
             <label class="form-label">Password</label>
-            <input type="password" class="form-control">
+            <input type="password" class="form-control" name="password">
          </div>
          <button type="submit" class="btn btn-primary">Login</button>
          <a href="signup.php">Sign Up</a>
