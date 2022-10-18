@@ -70,16 +70,13 @@ if(isset($_POST['username']) &&
                # get image extension store it in var
       		   $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
 
-               /** 
-				convert the image extension into lower case 
-				and store it in var 
-				**/
+               /** convert the image extension into lower case and store it in var **/
 				$img_ex_lc = strtolower($img_ex);
 
-				/** 
+				/*
 				crating array that stores allowed
 				to upload image extension.
-				**/
+				*/
 				$allowed_exs = array("jpg", "jpeg", "png");
 
 				/** 

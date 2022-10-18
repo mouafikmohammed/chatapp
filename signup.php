@@ -10,7 +10,7 @@
 </head>
 <body class="d-flex justify-content-center align-items-center vh-100">
    <div class="w-400 p-5 shadow rounded">
-      <form method="post" action="app/http/signup.php">
+      <form method="post" action="app/http/signup.php" enctype="multipart/form-data">
 
          <div class="d-flex 
                      justify-content-center 
