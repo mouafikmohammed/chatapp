@@ -1,3 +1,9 @@
+<?php
+   session_start();
+
+   if(!isset($_SESSION['username'])) {
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +13,7 @@
    <title>Med App - Login</title>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
    <link rel="stylesheet" href="css/style.css">
+   <link rel="icon" href="img/logo.png">
 </head>
 <body class="d-flex justify-content-center align-items-center vh-100">
    <div class="w-400 p-5 shadow rounded">
@@ -48,3 +55,9 @@
    </div>
 </body>
 </html>
+<?php
+   }else{
+      header("Location: home.php");
+      exit;
+   }
+?>
