@@ -6,6 +6,7 @@
       include 'app/db.conn.php';
       include 'app/helpers/user.php';
       include 'app/helpers/conversations.php';
+      include 'app/helpers/timeAgo.php';
 
       # getting User data
       $user = getUser($_SESSION['username'],$conn);
@@ -49,11 +50,16 @@
                <?php if (!empty($conversations)) { ?>
                   <?php foreach($conversations as $conversation){ ?>
                      <li class="list-group-item">
-                        <a href="chat.php" class="d-flex justify-content-between align-items-center p-2">
+                        <a href="chat.php?user=<?=$conversation['username']?>" class="d-flex justify-content-between align-items-center p-2">
                            <div class="d-flex align-items-center">
                               <img src="uploads/<?=$conversation['p_p']?>" class="w-10 rounded-circle">
                               <h3 class="fs-xs m-2"><?=$conversation['name']?></h3>
                            </div>
+                           <?php if(last_seen($conversation['last_seen']) == "Active") {?>
+                              <div title="online">
+                                 <div class="online"></div>
+                              </div>
+                           <?php } ?>
                         </a>
                      </li>
                   <?php } ?>
