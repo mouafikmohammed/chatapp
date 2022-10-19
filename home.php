@@ -4,11 +4,15 @@
    if(isset($_SESSION['username'])) {
       # database connection file
       include 'app/db.conn.php';
-
       include 'app/helpers/user.php';
+      include 'app/helpers/conversations.php';
 
       # getting User data
       $user = getUser($_SESSION['username'],$conn);
+
+      # Getting User conversations
+      $conversations = getConversation($user['user_id'], $conn);
+
 ?>
 
 <!DOCTYPE html>
@@ -42,24 +46,23 @@
             </div>
 
             <ul class="list-group mvh-50 overflow-auto">
-
-               <li class="list-group-item">
-                  <a href="chat.php" class="d-flex justify-content-between align-items-center p-2">
-                     <div class="d-flex align-items-center">
-                        <img src="uploads/user-default.jpg" class="w-10 rounded-circle">
-                        <h3 class="fs-xs m-2">Name</h3>
-                     </div>
-                  </a>
-               </li>
-               <li class="list-group-item">
-                  <a href="chat.php" class="d-flex justify-content-between align-items-center p-2">
-                     <div class="d-flex align-items-center">
-                        <img src="uploads/user-default.jpg" class="w-10 rounded-circle">
-                        <h3 class="fs-xs m-2">Name 2</h3>
-                     </div>
-                  </a>
-               </li>
-
+               <?php if (!empty($conversations)) { ?>
+                  <?php foreach($conversations as $conversation){ ?>
+                     <li class="list-group-item">
+                        <a href="chat.php" class="d-flex justify-content-between align-items-center p-2">
+                           <div class="d-flex align-items-center">
+                              <img src="uploads/<?=$conversation['p_p']?>" class="w-10 rounded-circle">
+                              <h3 class="fs-xs m-2"><?=$conversation['name']?></h3>
+                           </div>
+                        </a>
+                     </li>
+                  <?php } ?>
+               <?php }else { ?>
+                  <div class="alert alert-info text-center">
+                     <li class="fa fa-comments d-block fs-big"></li>
+                     no messages yet, Start the conversation
+                  </div>
+               <?php } ?>
             </ul>
 
          </div>
