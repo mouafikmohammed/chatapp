@@ -40,13 +40,13 @@
                <a href="logout.php" class="btn btn-dark">Logout</a>
             </div>
             <div class="input-group mb-3">
-               <input type="text" placeholder="Search..." class="form-control">
-               <button class="btn btn-primary">
+               <input type="text" placeholder="Search..." id="searchText" class="form-control">
+               <button class="btn btn-primary" id="searchBtn">
                   <i class="fa fa-search"></i>
                </button>
             </div>
 
-            <ul class="list-group mvh-50 overflow-auto">
+            <ul id="chatList" class="list-group mvh-50 overflow-auto">
                <?php if (!empty($conversations)) { ?>
                   <?php foreach($conversations as $conversation){ ?>
                      <li class="list-group-item">
@@ -77,6 +77,34 @@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
    <script>
       $(document).ready(function(){
+
+         // Search
+         $("#searchText").on("input",function(){
+            var searchText = $(this).val();
+            if(searchText == "") return;
+            $.post('app/ajax/search.php',
+               {
+                  key: searchText
+               },
+               function(data, status){
+                  $("#chatList").html(data);
+               }
+            );
+         });
+         // Search using the button
+         $("#searchBtn").on("click",function(){
+            var searchText = $("#searchText").val();
+            if(searchText == "") return;
+            $.post('app/ajax/search.php',
+               {
+                  key: searchText
+               },
+               function(data, status){
+                  $("#chatList").html(data);
+               }
+            );
+         });
+
          /**
          auto update last seen
          for logged in user
