@@ -21,6 +21,7 @@
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
    <link rel="stylesheet" href="css/style.css">
    <link rel="icon" href="img/logo.png">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="d-flex justify-content-center align-items-center vh-100">
 
@@ -33,6 +34,34 @@
                </div>
                <a href="logout.php" class="btn btn-dark">Logout</a>
             </div>
+            <div class="input-group mb-3">
+               <input type="text" placeholder="Search..." class="form-control">
+               <button class="btn btn-primary">
+                  <i class="fa fa-search"></i>
+               </button>
+            </div>
+
+            <ul class="list-group mvh-50 overflow-auto">
+
+               <li class="list-group-item">
+                  <a href="chat.php" class="d-flex justify-content-between align-items-center p-2">
+                     <div class="d-flex align-items-center">
+                        <img src="uploads/user-default.jpg" class="w-10 rounded-circle">
+                        <h3 class="fs-xs m-2">Name</h3>
+                     </div>
+                  </a>
+               </li>
+               <li class="list-group-item">
+                  <a href="chat.php" class="d-flex justify-content-between align-items-center p-2">
+                     <div class="d-flex align-items-center">
+                        <img src="uploads/user-default.jpg" class="w-10 rounded-circle">
+                        <h3 class="fs-xs m-2">Name 2</h3>
+                     </div>
+                  </a>
+               </li>
+
+            </ul>
+
          </div>
       </div>
 
