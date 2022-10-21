@@ -19,8 +19,53 @@ a {
 }
 
 .online {
-   width: 10px;
-   height: 10px;
+   width: 9px;
+   height: 9px;
    background: green;
    border-radius: 50%;
+}
+
+.w-15 {
+   width: 15%;
+}
+.fs-sm{
+   font-size: 1.4rem;
+}
+small{
+   color: #bbb;
+   font-size: 0.7rem;
+   text-align: right;
+}
+.chat-box {
+   overflow-y: auto;
+   max-height: 50vh;
+}
+.rtext {
+   width: 65%;
+   background: #F8F9FA;
+   color: #444;
+}
+.ltext {
+   width: 65%;
+   background: #3289c8;
+   color: #fff;
+}
+/* width */
+*::-webkit-scrollbar{
+   width: 3px;
+}
+/* Track */
+*::-webkit-scrollbar-track{
+   background: #F1F1F1;
+}
+/* Handle*/
+*::-webkit-scrollbar-thumb{
+   background: #aaa;
+}
+/* Handle on hover*/
+*::-webkit-scrollbar-thumb:hover{
+   background: #3289c8;
+}
+textarea{
+   resize: none;
 }

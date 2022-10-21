@@ -4,6 +4,7 @@
    if(isset($_SESSION['username'])) {
       # database connection file
       include 'app/db.conn.php';
+      
       include 'app/helpers/user.php';
       include 'app/helpers/conversations.php';
       include 'app/helpers/timeAgo.php';
