@@ -4,6 +4,23 @@
    if(isset($_SESSION['username'])) {
       # database connection file
       include 'app/db.conn.php';
+
+      include 'app/helpers/user.php';
+      include 'app/helpers/timeAgo.php';
+
+
+      if(!isset($_GET['user'])){
+         header("Location: home.php");
+         exit;
+      }
+
+      # getting User data
+      $chatWith = getUser($_GET['user'],$conn);
+
+      if(empty($chatWith)){
+         header("Location: home.php");
+         exit;
+      }
 ?>
 
 <!DOCTYPE html>
@@ -23,12 +40,16 @@
       <a href="home.php" class="fs-4 link-dark">&#8592;</a>
 
       <div class="d-flex align-items-center">
-         <img src="uploads/user-default.jpg" class="w-15 rounded-circle">
+         <img src="uploads/<?=$chatWith['p_p']?>" class="w-15 rounded-circle">
          <h3 class="display-4 fs-sm m-2">
-            Name<br>
-            <div class="d-flex align-items-center" title="online">
-               <div class="online"></div>
-               <small class="d-block p-1">online</small>
+            <?=$chatWith['name']?><br>
+            <div class="d-flex align-items-center">
+               <?php if(last_seen($chatWith['last_seen']) == "Active") {?>
+                  <div class="online"></div>
+                  <small class="d-block p-1" title="online">online</small>
+               <?php }else {?>
+                  <small class="d-block p-1" title="<?=$chatWith['last_seen']?>"><?=$chatWith['last_seen']?></small>
+               <?php } ?>
             </div>
          </h3>
       </div>
@@ -72,9 +93,9 @@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
    <script>
       var scrollDown = function(){
-         let chatBox = document.getElementByID('chatBox');
+         let chatBox = document.getElementById('chatBox');
          chatBox.scrollTop = chatBox.scrollHeight;
-      };
+      }
       scrollDown();
       $(document).ready(function(){
 
@@ -88,4 +109,3 @@
       header("Location: index.php");
       exit;
    }
-?>
