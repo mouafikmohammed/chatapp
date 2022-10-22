@@ -7,6 +7,7 @@
 
       include 'app/helpers/user.php';
       include 'app/helpers/timeAgo.php';
+      include 'app/helpers/chat.php';
 
 
       if(!isset($_GET['user'])){
@@ -21,6 +22,8 @@
          header("Location: home.php");
          exit;
       }
+
+      $chats = getChats($_SESSION['user_id'],$chatWith['user_id'],$conn);
 ?>
 
 <!DOCTYPE html>
@@ -48,21 +51,35 @@
                   <div class="online"></div>
                   <small class="d-block p-1" title="online">online</small>
                <?php }else {?>
-                  <small class="d-block p-1" title="<?=$chatWith['last_seen']?>"><?=$chatWith['last_seen']?></small>
+                  <small class="d-block p-1" title="<?=$chatWith['last_seen']?>">Last seen: <?=$chatWith['last_seen']?></small>
                <?php } ?>
             </div>
          </h3>
       </div>
 
       <div class="shadow p-4 rounded d-flex flex-column mt-2 h-50 chat-box" id="chatBox">
-         <p class="rtext align-self-end border rounded p-2 mb-1">
-            Hello, there
-            <small class="d-block">13:00</small>
-         </p>
-         <p class="ltext border rounded p-2 mb-1">
-            Hello
-            <small class="d-block">13:00</small>
-         </p>
+         <?php
+            if(!empty($chats)){
+               foreach($chats as $chat){
+                  if($chat['from_id'] == $_SESSION['user_id'])
+                  { ?>
+                     <p class="rtext align-self-end border rounded p-2 mb-1">
+                        <?=$chat['message']?>
+                        <small class="d-block"><?=$chat['created_at']?></small>
+                     </p>
+            <?php }else { ?>
+                     <p class="ltext border rounded p-2 mb-1">
+                        <?=$chat['message']?>
+                        <small class="d-block"><?=$chat['created_at']?></small>
+                     </p>
+         <?php   }
+               }
+         }else{ ?>
+            <div class="alert alert-info text-center">
+               <li class="fa fa-comments d-block fs-big"></li>
+               no messages yet, Start the conversation
+            </div>
+         <?php }?>
       </div>
       <div class="input-group mb-3">
          <textarea cols="3" id="message" class="form-control"></textarea>
@@ -98,6 +115,38 @@
                   scrollDown();
       		   });
          });
+
+
+         /**
+         auto update last seen
+         for logged in user
+         **/
+        let lastSeenUpdate = function() {
+            $.get("app/ajax/update_last_seen.php");
+         }
+         lastSeenUpdate();
+         /** 
+          auto update last seen every 10 sec
+         **/
+         setInterval(lastSeenUpdate, 10000);
+
+         // auto refrech / reload
+         let fechData = function(){
+            $.post("app/ajax/getMessage.php",
+               {
+                  id_2: <?=$chatWith['user_id']?>
+               },
+               function(data, status){
+                  $("#chatBox").append(data);
+                  if(data != "") scrollDown();
+      		   }
+            );
+         }
+         fechData();
+         /** 
+          auto update last seen every 0.5 sec
+         **/
+         setInterval(fechData, 500);
       });
 
    </script>

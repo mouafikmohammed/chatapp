@@ -38,6 +38,7 @@ small{
 }
 .chat-box {
    overflow-y: auto;
+   overflow-x: hidden;
    max-height: 50vh;
 }
 .rtext {
