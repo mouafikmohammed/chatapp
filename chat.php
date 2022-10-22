@@ -56,7 +56,7 @@
                   <div class="online"></div>
                   <small class="d-block p-1" title="online">online</small>
                <?php }else {?>
-                  <small class="d-block p-1" title="<?=$chatWith['last_seen']?>">Last seen: <?=$chatWith['last_seen']?></small>
+                  <small class="d-block p-1" title="<?=$chatWith['last_seen']?>">Last seen: <?=last_seen($chatWith['last_seen'])?></small>
                <?php } ?>
             </div>
          </h3>
