@@ -8,6 +8,8 @@
       include 'app/helpers/user.php';
       include 'app/helpers/conversations.php';
       include 'app/helpers/timeAgo.php';
+      include 'app/helpers/last_chat.php';
+
 
       # getting User data
       $user = getUser($_SESSION['username'],$conn);
@@ -54,7 +56,14 @@
                         <a href="chat.php?user=<?=$conversation['username']?>" class="d-flex justify-content-between align-items-center p-2">
                            <div class="d-flex align-items-center">
                               <img src="uploads/<?=$conversation['p_p']?>" class="w-10 rounded-circle">
-                              <h3 class="fs-xs m-2"><?=$conversation['name']?></h3>
+                              <h3 class="fs-xs m-2">
+                                 <?=$conversation['name']?><br>
+                                 <small>
+                                    <?php
+                                       echo lastChat($_SESSION['user_id'],$conversation['user_id'],$conn);
+                                    ?>
+                                 </small>
+                              </h3>
                            </div>
                            <?php if(last_seen($conversation['last_seen']) == "Active") {?>
                               <div title="online">
