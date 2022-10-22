@@ -63,43 +63,43 @@
             Hello
             <small class="d-block">13:00</small>
          </p>
-
-         <p class="rtext align-self-end border rounded p-2 mb-1">
-            Hello, there
-            <small class="d-block">13:00</small>
-         </p>
-         <p class="ltext border rounded p-2 mb-1">
-            Hello
-            <small class="d-block">13:00</small>
-         </p>
-
-         <p class="rtext align-self-end border rounded p-2 mb-1">
-            Hello, there
-            <small class="d-block">13:00</small>
-         </p>
-         <p class="ltext border rounded p-2 mb-1">
-            Hello
-            <small class="d-block">13:00</small>
-         </p>
       </div>
       <div class="input-group mb-3">
-         <textarea cols="3" class="form-control"></textarea>
-         <button class="btn btn-primary">
+         <textarea cols="3" id="message" class="form-control"></textarea>
+         <button class="btn btn-primary" id="sendBtn">
             <i class="fa fa-paper-plane"></i>
          </button>
       </div>
    </div>
 
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
    <script>
       var scrollDown = function(){
          let chatBox = document.getElementById('chatBox');
          chatBox.scrollTop = chatBox.scrollHeight;
       }
       scrollDown();
+
       $(document).ready(function(){
 
+         $("#sendBtn").on('click', function(){
+            message = $("#message").val();
+            if (message == "") return;
+
+            $.post("app/ajax/insert.php",
+               {
+      		   	message: message,
+      		   	to_id: <?=$chatWith['user_id']?>
+      		   },
+               function(data, status){
+                  $("#message").val("");
+                  $("#chatBox").append(data);
+                  scrollDown();
+      		   });
+         });
       });
+
    </script>
 </body>
 </html>
