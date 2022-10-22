@@ -6,8 +6,11 @@
       include 'app/db.conn.php';
 
       include 'app/helpers/user.php';
-      include 'app/helpers/timeAgo.php';
       include 'app/helpers/chat.php';
+      include 'app/helpers/opened.php';
+
+
+      include 'app/helpers/timeAgo.php';
 
 
       if(!isset($_GET['user'])){
@@ -24,6 +27,8 @@
       }
 
       $chats = getChats($_SESSION['user_id'],$chatWith['user_id'],$conn);
+
+      opened($chatWith['user_id'],$conn,$chats);
 ?>
 
 <!DOCTYPE html>
